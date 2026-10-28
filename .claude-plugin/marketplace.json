@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "instagram-agent-skill-fa",
+  "description": "دستیار اینستاگرام فارسی برای Claude",
+  "owner": {
+    "name": "Z-Hp",
+    "url": "https://github.com/Z-Hp"
+  },
+  "plugins": [
+    {
+      "name": "instagram-agent-fa",
+      "description": "سیزده اسکیل Claude برای پیج اینستاگرام فارسی: ریلز، کپشن، کاروسل، تحلیل رقبا و پاک‌کننده‌ی ردّ ماشین، با پشتیبانی کامل از نیم‌فاصله و متن فارسی.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/Z-Hp/instagram-agent-skill-fa"
+    }
+  ]
+}
