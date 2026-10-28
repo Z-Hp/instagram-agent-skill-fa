@@ -138,16 +138,70 @@ cp ~/instagram-agent-skill-fa/templates/voice.md ~/.claude/instagram/voice.md
 python -m unittest discover -s tests
 ```
 
-### به‌روزرسانی
+## به‌روزرسانی
 
-```
-cd instagram-agent-skill-fa
-git pull
+فورک شما **خودش به‌روز نمی‌شود.** هر وقت نسخه‌ی تازه آمد:
+
+**۱. فورک را هم‌گام کنید** (اگر از فورک خودتان نصب کرده‌اید): صفحه‌ی فورکتان در
+GitHub را باز کنید و **Sync fork** ← **Update branch** را بزنید. اگر مستقیم از
+`Z-Hp/instagram-agent-skill-fa` نصب کرده‌اید، این قدم لازم نیست.
+
+**۲. نسخه‌ی روی کامپیوترتان را به‌روز کنید:**
+
+- اگر با **راه اول (کپی)** نصب کرده‌اید:
+
+  ```
+  cd instagram-agent-skill-fa
+  git pull
+  ```
+
+  بعد دستور کپی قدم ۲ را دوباره بزنید.
+
+- اگر با **راه دوم (پلاگین)** نصب کرده‌اید، در Claude بنویسید:
+
+  ```
+  /plugin marketplace update instagram-agent-skill-fa
+  /plugin update instagram-agent-fa@instagram-agent-skill-fa
+  ```
+
+  بعد Claude را ببندید و دوباره باز کنید.
+
+فایل‌های شخصی شما (`voice.md` و `feedback.md`) در پوشه‌ی `~/.claude/instagram/`
+هستند و با به‌روزرسانی دست نمی‌خورند.
+
+**از آپدیت‌ها باخبر شوید:** در صفحه‌ی همین ریپو **Watch** ← **Custom** ←
+**Releases** را بزنید.
+
+## اگر خودتان اسکیل‌ها را تغییر می‌دهید
+
+### نصب با لینک، به‌جای کپی
+
+اگر می‌خواهید اسکیل‌ها را برای خودتان عوض کنید (یا وقتی از Claude می‌خواهید
+«این اسکیل از این به بعد فلان کار رو هم بکنه»)، به‌جای کپی، اسکیل‌ها را به پوشه‌ی
+ریپو **لینک** کنید. این‌طوری هر تغییری مستقیم در ریپو ذخیره می‌شود و در GitHub
+Desktop یا `git status` می‌بینیدش. با کپی، تغییر فقط در نسخه‌ی نصب‌شده می‌ماند و
+با به‌روزرسانی بعدی پاک می‌شود.
+
+ویندوز (به دسترسی مدیر نیاز ندارد؛ اگر قبلاً با کپی نصب کرده‌اید، اول پوشه‌های
+`ig-*` قبلی را از `.claude\skills` بردارید):
+
+```powershell
+Get-ChildItem "$env:USERPROFILE\instagram-agent-skill-fa\skills" -Directory -Filter "ig-*" | ForEach-Object { New-Item -ItemType Junction -Path "$env:USERPROFILE\.claude\skills\$($_.Name)" -Target $_.FullName }
 ```
 
-بعد دستور کپی قدم ۲ را دوباره بزنید. فایل‌های شخصی شما (`voice.md` و
-`feedback.md`) در پوشه‌ی `~/.claude/instagram/` هستند و با به‌روزرسانی دست
-نمی‌خورند.
+مک و لینوکس:
+
+```bash
+for d in ~/instagram-agent-skill-fa/skills/ig-*; do ln -s "$d" ~/.claude/skills/; done
+```
+
+### اگر نسخه‌ی خودتان را منتشر می‌کنید
+
+هر بار که تغییری را روی GitHub می‌فرستید، عدد `version` را در
+`.claude-plugin/plugin.json` بالا ببرید: اصلاح کوچک `1.0.0` ← `1.0.1`، قابلیت
+تازه `1.0.0` ← `1.1.0`. **بدون این، پلاگینِ کسانی که از شما نصب کرده‌اند به‌روز
+نمی‌شود**، چون Claude فقط با عوض شدن این عدد نسخه‌ی تازه را می‌شناسد. اگر یک
+Release هم با چند خط توضیح بسازید، کسانی که Watch زده‌اند خبردار می‌شوند.
 
 ## یادش می‌ماند: بازخورد شما قاعده می‌شود
 
